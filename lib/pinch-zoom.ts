@@ -63,20 +63,12 @@ function getAbsoluteValue(value: string | number, max: number): number {
   return parseFloat(value);
 }
 
-// I'd rather use DOMMatrix/DOMPoint here, but the browser support isn't good enough.
-// Given that, better to use something everything supports.
-let cachedSvg: SVGSVGElement;
-
-function getSVG(): SVGSVGElement {
-  return cachedSvg || (cachedSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'));
-}
-
 function createMatrix(): SVGMatrix {
-  return getSVG().createSVGMatrix();
+  return new DOMMatrix();
 }
 
 function createPoint(): SVGPoint {
-  return getSVG().createSVGPoint();
+  return new DOMPoint();
 }
 
 const MIN_SCALE = 0.01;
